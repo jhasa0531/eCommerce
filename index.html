@@ -1,0 +1,154 @@
+<!doctype HTML>
+<html>
+    <head>
+        <style>
+            
+            img {
+                width:350px;
+            }
+            input{
+                width:90px;
+            }
+            div{
+                background-color:red;
+                /*width:350px;*/
+            }
+            #center{
+                text-align: center
+            }
+            body{
+                background-color: red
+            }
+
+            #div1{
+                display: inline-block;
+                width: 30%;
+            }
+            #div2{
+                display: inline-block;
+                                width: 30%;
+            }
+            #div3{
+                display: inline-block;
+                                width: 30%;
+            }
+
+        </style>   
+        
+        <script>
+            pr1 = 50; wpr1 = 25;
+            pr2 = 29; wpr2 = 14.5;
+            pr3 = 1;  wpr3 = 0.50;
+            var taxRate = 8.275;
+                
+        
+        
+        
+            function initPrices(){
+                document.getElementById("span1").innerHTML = "Price: $" + pr1;
+                document.getElementById("span2").innerHTML = "Price: $" + pr2;
+                document.getElementById("span3").innerHTML = "Price: $" + pr3;
+ 
+            }
+            function ProcessOrder(){
+                var q1 = parseInt(document.getElementById("qty1").value);
+                var q2 = parseInt(document.getElementById("qty2").value);
+                var q3 = parseInt(document.getElementById("qty3").value);
+                //CALCULATIONS FOR THE ITEMS
+                var CostSubTot = (pr1*q1) + (pr2*q2) + (pr3*q3);
+                var CompanySubTot = (wpr1*q1) * (wpr2*q2) * (wpr3*q3);
+                var Profit = CostSubTot - CompanySubTot;
+                var tax = CostSubTot * taxRate/100;
+                var shipping = 0;
+                //SHIPPING COSTS FOR THE ITEMS
+                if (CostSubTot <100){
+                    shipping = 25;
+                }else if (CostSubTot >=100 && CostSubTot <=200){
+                    shipping = 10;
+                // }else shipping =0;
+                }
+
+                var CostTotal = CostSubTot + tax + shipping;
+                var itemsSold = q1 + q2 + q3;
+                var op = document.getElementById("output");
+                var build = "";
+
+                build += "<div id = 'custInfo'>";
+                build += "<pre>"
+                build += "**  CUSTOMER ORDER DETAILS  ** <br>";
+                build += "------------------------------ <br>";
+                build += "Subtotal:            $ " + CostSubTot +"<br>";
+                build += "Tax:                 $ " + tax + "<br>";
+                build += "Shipping & Handling: $ " + shipping + "<br>";
+                build += "Your TOTAL:          $ " + CostTotal + "<br><br>";
+                build += "</div>";
+
+                build += "<br><hr>";
+                build += "<pre>"
+                build += "**  ORDER DETAILS FOR COMPANY  ** <br>";
+                build += "------------------------------<br>"; 
+                build += "Total Items Sold:     $" + itemsSold + "<br";
+                build += "Customer Subtotal:    $" + CostSubTot + "<br>";
+                build += "Company Subtotal:     $" + CompanySubTot + "<br>";
+                build += "Profit/Loss:          $" + Profit +"<br><br>";           
+
+                op.innerHTML =build;
+
+                }
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                           
+        </script>
+    </head>
+    <body>
+    <h1 id = "center">Justin's precious metals </h1>
+    <!-- Resource #1 -->
+    <div id="div1">
+        <img src = "gold.png"><br>
+        <p>PURE 24K GOLD</p><br>
+        <span> Price: $50/gram    Enter the amount you want in grams  ...</span>
+        <input type = "text" id = "qty1" placeholder = "Enter amount">
+    </div>
+    <!-- Resource #2 -->
+    <div id="div2">
+    <img src = "platinum.jpg"><br>
+        <p>PURE PLATINUM</p><br>
+        <span> Price: $29/gram    Enter the amount you want in grams  ...</span>
+        <input type = "text" id = "qty2" placeholder = "Enter amount">
+    </div>
+    <!--Resource #3-->
+    <div id="div3">
+    <img src = "silver.jpg"><br>
+        <p>PURE SILVER</p><br>
+        <span> Price: $1/gram    Enter the amount you want in grams  ...</span>
+        <input type = "text" id = "qty3" placeholder = "Enter amount">
+    </div>  
+    <button id="order" onclick="ProcessOrder()" > order</button>
+    <div id="output"> </div> 
+
+     
+
+        
+    </body> 
+    </head>  
+</html> 
